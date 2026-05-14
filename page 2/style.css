@@ -152,6 +152,29 @@ body {
     align-items: center;
 }
 
+/*---------------------------------HISTORIQUE--------------------*/
+
+.les_historiques{
+    margin-top: 20px;
+    margin-left: 50px;
+    height: 15px;
+    top: 40px;
+}
+
+
+.les_historiques li{
+
+    display: inline;
+    position: relative;
+}
+
+.les_historiques button{
+    border: none;
+    background: white;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
 
 
                                             /*---------------------PICTURES----------------------------*/
@@ -209,6 +232,13 @@ body {
     width:50px;
     height: 50px;
     margin-right: 25px;
+}
+
+
+
+.les_historiques img{
+    width:25px;
+    height: 25px;
 }
 
 @media (max-width: 768px) {
