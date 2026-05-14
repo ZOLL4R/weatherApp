@@ -241,6 +241,11 @@ body {
     height: 25px;
 }
 
+#down img{
+    width: 30px;
+    height: 30px;
+}
+
 @media (max-width: 768px) {
     .search-bar {
         flex-direction: column;
