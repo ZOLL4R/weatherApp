@@ -5,25 +5,31 @@ const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
 const SearchedCity = document.querySelector(".search-bar input");
 const Search_btn = document.querySelector(".search-bar button");
 
-let cityTable = []; 
+let cityTable = JSON.parse(localStorage.getItem("cities")) || []; 
 
-                    //FONCTION TO CHECK THE WEATHER------------------------------------
+                    //FONCTION TO CHECK THE WEATHER    ------------------------------------
 
 
 async function checkWeather(NameCity) { 
 
-    // Kanden mn ligne 16 --> 89 hia function checkWeather 
+   
     if (NameCity === "") return;
 
-    
+    try{
     const weatherResponse = await fetch(apiURL + NameCity + `&appid=${apiKey}`);
 
     const data = await weatherResponse.json();
 
     if (weatherResponse.status == 404){
+
         document.querySelector(".errorsMSG_Name").style.display = "block";
         document.querySelector(".weatherChart").style.display = "none";
+        document.querySelector(".city").textContent = "ERROR";
+        return;
+
     }else{
+
+        document.querySelector(".errorsMSG_Name").style.display = "none";
         document.querySelector(".city").innerHTML = data.name;
         document.querySelector(".T").innerHTML = data.main.temp + '°C';
         document.querySelector(".H").innerHTML = data.main.humidity + '%';
@@ -58,26 +64,30 @@ async function checkWeather(NameCity) {
             break;
 
         case "Thunderstorm":
-            weatherImg.src ="image/sunny.png";
+            weatherImg.src ="image/sunny.png";  // Ba9i ml9itch chi we7din li zwinin b7ali UWU
             break;
 
         case "Mist":
-            weatherImg.src ="image/sunny.png";
+            weatherImg.src ="image/sunny.png";  //hta hna
             break;
 
         }   
 
-        document.querySelector(".weatherChart").style.display = "block";
+        document.querySelector(".weatherChart").style.display = "block";}
 
         const foundCity = cityTable.find(element => element === data.name);
+
         if (!foundCity){
+
             cityTable.push(data.name);
+            localStorage.setItem("cities",JSON.stringify(cityTable));
             addToHistorique(NameCity);
-        }  
+
+        }  }catch(error){
+            document.querySelector(".errorsMSG_Fetch").style.display = "block";
+        }
 
         
-
-        }
 
 }
 
@@ -99,15 +109,30 @@ async function checkWeather(NameCity) {
 
 
 Search_btn.addEventListener("click", ()=>{
+    
     checkWeather(SearchedCity.value);
+
 
 })
 
+function goUp(){
+
+}
+
+function goDown(){
+
+}
+
+function obliterate(){
+
+}
 
 
 
 
 //--------------------Historique---------------------
 
-
+cityTable.forEach(city => {
+    addToHistorique(city);
+});
 
