@@ -11,18 +11,23 @@
     
     <body>
         <div class="intro" style="text-align: center;">
-            <h1>Welcome to our <span>weather forcast app</span></h1>
+            <h1>Welcome to our <span>weather forecast app</span></h1>
             <p>Please enter any city you like in our search bar below</p>
         </div>  
 
         <div class="search-bar">
-            <input type="text" placeholder="Enter city name here (Ex: Paris,London,Béni Mellal....)" id="txt">
-            <button id="btn-search"><img src="image/vecteezy_reaction-icon-to-posts-on-social-media-and-video-streaming_14203540.png" alt="search"></button>
+            <input type="text" placeholder="Enter city name here (Ex: Paris,London,New York....)" id="txt">
+            <button id="btn-search" title="search"><img src="image/vecteezy_reaction-icon-to-posts-on-social-media-and-video-streaming_14203540.png" alt="search"></button>
         </div>
-
         <div class="errorsMSG">
-            <p>Wrong or invalide city name</p>
+            <div class="errorsMSG_Name">
+                <p>Wrong or invalid city name</p>
+            </div>
+            <div class="errorsMSG_Fetch">
+                <p>Unknown API error</p>
+            </div>
         </div>
+        
 
         <div class="contenuCarte">
             <div class="carte-meteo">
@@ -53,10 +58,10 @@
            
 
         </div>
-
+        <!-------------------------------Historique PART-------------------------------->
         <div class="historique">
             <ul class="les_historiques">
-                <li>test <button id="up"><img src="image/up_arrow.png" alt="go up"></button>  <button id="down"><img src="image/down_arrow.png" alt="go down"></button>  <button id="delete"><img src="image/delete.png" alt="delete"></button></li>
+                
             </ul>
         </div>
         </div>
