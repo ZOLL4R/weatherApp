@@ -5,7 +5,7 @@ const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
 const SearchedCity = document.querySelector(".search-bar input");
 const Search_btn = document.querySelector(".search-bar button");
 
-let cityTable = JSON.parse(localStorage.getItem("cities")) || []; 
+let cityTable = JSON.parse(sessionStorage.getItem("cities")) || []; 
 
                     //FONCTION TO CHECK THE WEATHER    ------------------------------------
 
@@ -80,8 +80,8 @@ async function checkWeather(NameCity) {
         if (!foundCity){
 
             cityTable.push(data.name);
-            localStorage.setItem("cities",JSON.stringify(cityTable));
-            addToHistorique(NameCity);
+            sessionStorage.setItem("cities",JSON.stringify(cityTable));
+            addToHistorique(data.name);
 
         }  }catch(error){
             document.querySelector(".errorsMSG_Fetch").style.display = "block";
@@ -105,30 +105,39 @@ async function checkWeather(NameCity) {
         
 
 
-                    // BUTTON --------------------------------------------
+                    // BUTTONS --------------------------------------------
 
 
 Search_btn.addEventListener("click", ()=>{
     
-    checkWeather(SearchedCity.value);
+    checkWeather(SearchedCity.value);})
 
-
-})
-
-function goUp(){
-
-}
-
-function goDown(){
-
-}
-
-function obliterate(){
-
-}
+SearchedCity.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") checkWeather(SearchedCity.value); //entrer blast le bouton search
+  });
 
 
 
+
+
+
+
+document.querySelector(".les_historiques").addEventListener("click", (e) => {
+    
+    const $delete = e.target.closest(".delete");
+    if($delete){
+        const $cityToDelete = $delete.closest("li");
+        if($cityToDelete){
+
+            const cityName = $cityToDelete.firstChild.textContent.trim();
+            cityTable = cityTable.filter(city => city != cityName);
+            localStorage.setItem( "cities",JSON.stringify(cityTable) );
+            $cityToDelete.remove();
+            return;
+
+        }
+    }
+  });
 
 //--------------------Historique---------------------
 
